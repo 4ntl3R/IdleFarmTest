@@ -8,7 +8,12 @@ namespace AKhvalov.IdleFarm.Runtime.Views
     {
         public event Action<InteractionActorView, InteractionReactorView> OnInteraction;
 
+        [SerializeField] 
+        private GameObject lootPickTarget;
+        
         private InteractionReactorView _reactorView;
+
+        public GameObject LootPickTarget => lootPickTarget;
 
         private void OnTriggerStay(Collider other)
         {
