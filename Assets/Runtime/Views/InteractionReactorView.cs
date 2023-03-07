@@ -21,7 +21,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         private void Awake()
         {
-            _collider.GetComponent<Collider>();
+            _collider = GetComponent<Collider>();
             
             #if UNITY_EDITOR
             
