@@ -1,4 +1,5 @@
 using AKhvalov.IdleFarm.Runtime.Controllers;
+using AKhvalov.IdleFarm.Runtime.Pool;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -11,6 +12,11 @@ namespace AKhvalov.IdleFarm.Runtime
 
         [SerializeField] 
         private InputJoystickController inputJoystickController;
+        
+        private GameObjectPool lootPool;
+
+        [SerializeField] 
+        private GameObject lootPrefab;
 
         [SerializeField] 
         private float playerSpeedMultiplier = 10f;
@@ -18,6 +24,7 @@ namespace AKhvalov.IdleFarm.Runtime
         
         private void Start()
         {
+            CreateClasses();
             ManageInjections();
             AddSubscriptions();
         }
@@ -25,6 +32,11 @@ namespace AKhvalov.IdleFarm.Runtime
         private void OnDestroy()
         {
             DeleteSubscriptions();
+        }
+        
+        private void CreateClasses()
+        {
+            lootPool = new GameObjectPool(lootPrefab);
         }
 
         private void ManageInjections()
@@ -40,6 +52,12 @@ namespace AKhvalov.IdleFarm.Runtime
         private void DeleteSubscriptions()
         {
             inputJoystickController.OnJoystickDrag -= playerMovementView.ChangeVelocity;
+            lootPool.UnsubscribeEvents();
+        }
+
+        public void Test()
+        {
+            lootPool.GenerateObject(Vector3.forward * (Random.value * 5));
         }
     }
 }
