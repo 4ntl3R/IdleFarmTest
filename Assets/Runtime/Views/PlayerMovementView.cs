@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AKhvalov.IdleFarm.Runtime.Controllers
 {
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementView : MonoBehaviour
     {
         private float _speedMultiplier;
         
