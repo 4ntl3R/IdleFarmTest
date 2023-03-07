@@ -17,5 +17,5 @@ MonoBehaviour:
   lootSpawnJumpHeight: 1
   lootSpawnAnimationEase: 2
   lootPickAnimationDuration: 1
-  lootPickJumpHeight: 1
+  lootPickJumpHeight: 5
   lootPickAnimationEase: 2
