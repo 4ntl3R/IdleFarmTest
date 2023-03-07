@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace AKhvalov.IdleFarm.Runtime.Views
 {
+    [RequireComponent(typeof(Collider))]
     public class InteractionActorView : MonoBehaviour
     {
         public event Action<InteractionActorView, InteractionReactorView> OnInteraction;
