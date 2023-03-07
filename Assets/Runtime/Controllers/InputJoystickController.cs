@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace AKhvalov.IdleFarm.Runtime.Controllers
 {
-    public class InputJoystickController : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+    public class InputJoystickController : InitiatableMonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
     {
         public event Action<Vector2> OnJoystickDrag;
         
@@ -14,8 +14,6 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         [SerializeField] 
         private RectTransform innerJoystick;
 
-        private bool _isInitiated = false;
-        
         private RectTransform _outerJoystick;
 
         private Vector2 _dragPosition = Vector2.zero;
@@ -50,15 +48,9 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
             innerJoystick.localPosition = Vector3.zero;
         }
 
-        private void Initiate()
+        protected override void Initiate()
         {
-            if (_isInitiated)
-            {
-                return;
-            }
-
-            _isInitiated = true;
-
+            base.Initiate();
             _outerJoystick = GetComponent<RectTransform>();
             _maxDragMagnitude = radialConstraint.localPosition.magnitude;
         }
