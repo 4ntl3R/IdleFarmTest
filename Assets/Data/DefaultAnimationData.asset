@@ -12,13 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd0b8b32b46b074ab9ee9f43456495d, type: 3}
   m_Name: DefaultAnimationData
   m_EditorClassIdentifier: 
-  lootSpawnSpreading: 1
-  lootSpawnAnimationDuration: 0.5
-  lootSpawnJumpHeight: 1
-  lootSpawnAnimationEase: 2
-  lootPickAnimationDuration: 1
-  lootPickJumpHeight: 5
-  lootPickAnimationEase: 2
   growParameters:
     targetScale: {x: 1, y: 2, z: 1}
     targetColor: {r: 1, g: 1, b: 0, a: 0}
@@ -28,3 +21,13 @@ MonoBehaviour:
     growMaxColorLerp: 0.5
     ease: 2
     finalPunch: {x: 0.25, y: 1, z: 0.25}
+  lootSpawnParametersData:
+    spreading: 1
+    animationDuration: 0.5
+    jumpHeight: 1
+    animationEase: 2
+  lootPickParametersData:
+    fullAnimationDuration: 1
+    jumpAnimationDuration: 0.3
+    jumpHeight: 3
+    animationEase: 2
