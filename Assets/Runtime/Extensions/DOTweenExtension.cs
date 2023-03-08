@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Runtime.Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,6 +8,7 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
 {
     public static class DOTweenExtension
     {
+        //todo: make structure for parameters, remove magic numbers
         public static Sequence JumpSpawn(this GameObject target, Action onCompleteCallback, 
             float maxDistance, 
             float jumpPower, 
@@ -15,6 +17,7 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
         {
             var jumpDistance = (0.5f + Random.value/2) * maxDistance;
             var jumpDestination = new Vector3(Random.value, 0, Random.value).normalized * jumpDistance;
+            jumpDestination += target.transform.position;
             
             Sequence result = DOTween.Sequence();
             result
@@ -27,6 +30,7 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             return result;
         }
         
+        //todo: make structure for parameters, remove magic numbers
         public static Sequence JumpToObject(this GameObject target, GameObject destination, Action onCompleteCallback, 
             float jumpPower, 
             float duration, 
@@ -55,32 +59,31 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             return result;
         }
 
-        public static Sequence Grow(this GameObject target, Material material, Vector3 targetScale, Color targetColor, Color startColor,
-            Action onCompleteCallback,
-            float fullDuration,
-            float finalDuration,
-            float growMaxColorLerp,
-            Ease ease,
-            Vector3 finalPunch)
+        public static Sequence Grow(this GameObject target, Material material, Action onCompleteCallback, 
+            GrowAnimationParametersData parameters)
         {
-            var growDuration = fullDuration - finalDuration;
-            var growColorEnd = Color.Lerp(startColor, targetColor, growMaxColorLerp); 
-            
-            target.transform.localScale = new Vector3(targetScale.x, 0, targetScale.y);
-           material.color = startColor;
-            
+            target.transform.localScale = parameters.StartScale;
+            material.color = parameters.StartColor;
             Sequence result = DOTween.Sequence();
             result
-                .Append(target.transform.DOScale(targetScale, fullDuration))
-                .Join(material.DOColor(growColorEnd, growDuration))
-                .Append(target.transform.DOPunchScale(finalPunch, finalDuration, 1, 0.5f))
-                .Join(material.DOColor(targetColor, finalDuration))
+                .Append(target.transform.DOScale(parameters.TargetScale, parameters.GrowDuration))
+                .Join(material.DOColor(parameters.GrowEndColor, parameters.GrowDuration))
+                .Append(target.transform.DOPunchScale(parameters.FinalPunch, parameters.FinalDuration, parameters.PunchVibrato, parameters.PunchElastic))
+                .Join(material.DOColor(parameters.TargetColor, parameters.FinalDuration))
                 .OnComplete(onCompleteCallback.Invoke);
 
-            result.SetEase(ease);
+            result.SetEase(parameters.Ease);
             result.Pause();
 
             return result;
+        }
+
+        public static void SequenceDelay(float duration, Action delayedAction)
+        {
+            Sequence sequence = DOTween.Sequence();
+            sequence
+                .AppendInterval(duration)
+                .OnComplete(delayedAction.Invoke);
         }
     }
 }
