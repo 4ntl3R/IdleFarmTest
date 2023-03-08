@@ -54,5 +54,33 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
 
             return result;
         }
+
+        public static Sequence Grow(this GameObject target, Material material, Vector3 targetScale, Color targetColor, Color startColor,
+            Action onCompleteCallback,
+            float fullDuration,
+            float finalDuration,
+            float growMaxColorLerp,
+            Ease ease,
+            Vector3 finalPunch)
+        {
+            var growDuration = fullDuration - finalDuration;
+            var growColorEnd = Color.Lerp(startColor, targetColor, growMaxColorLerp); 
+            
+            target.transform.localScale = new Vector3(targetScale.x, 0, targetScale.y);
+           material.color = startColor;
+            
+            Sequence result = DOTween.Sequence();
+            result
+                .Append(target.transform.DOScale(targetScale, fullDuration))
+                .Join(material.DOColor(growColorEnd, growDuration))
+                .Append(target.transform.DOPunchScale(finalPunch, finalDuration, 1, 0.5f))
+                .Join(material.DOColor(targetColor, finalDuration))
+                .OnComplete(onCompleteCallback.Invoke);
+
+            result.SetEase(ease);
+            result.Pause();
+
+            return result;
+        }
     }
 }
