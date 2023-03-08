@@ -1,10 +1,12 @@
 using DG.Tweening;
+using Runtime.Data;
 using UnityEngine;
 
 namespace AKhvalov.IdleFarm.Runtime.Data
 {
-    [CreateAssetMenu(order = 1, fileName = "New LootAnimationData", menuName = "IdleFarm/LootAnimationData")]
-    public class LootAnimationData : ScriptableObject
+    [CreateAssetMenu(order = 1, fileName = "New AnimationData", menuName = "IdleFarm/AnimationData")]
+    //todo: make structure for parameters
+    public class AnimationData : ScriptableObject
     {
         [Header("Loot spawning animation parameters")]
         [SerializeField] 
@@ -30,6 +32,9 @@ namespace AKhvalov.IdleFarm.Runtime.Data
         [SerializeField] 
         private Ease lootPickAnimationEase = Ease.InSine;
 
+        [SerializeField] 
+        private GrowAnimationParametersData growParameters;
+
         public float LootSpawnSpreading => lootSpawnSpreading;
         public float LootSpawnAnimationDuration => lootSpawnAnimationDuration;
         public float LootSpawnJumpHeight => lootSpawnJumpHeight;
@@ -38,5 +43,7 @@ namespace AKhvalov.IdleFarm.Runtime.Data
         public float LootPickJumpHeight => lootPickJumpHeight;
         public float LootPickAnimationDuration => lootPickAnimationDuration;
         public Ease LootPickAnimationEase => lootPickAnimationEase;
+
+        public GrowAnimationParametersData GrowParameters => growParameters;
     }
 }

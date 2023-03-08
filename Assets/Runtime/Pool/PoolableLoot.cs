@@ -13,7 +13,7 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
         public event Action<GameObject> OnObjectUsed;
 
         [SerializeField] 
-        private LootAnimationData animationData;
+        private AnimationData animationData;
 
         private InteractionReactorView _reactorView;
         
