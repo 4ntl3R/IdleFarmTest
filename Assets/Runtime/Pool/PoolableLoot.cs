@@ -23,12 +23,7 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
             transform.position = position;
             gameObject.SetActive(true);
             
-            Sequence spawnAnimation = gameObject.JumpSpawn(
-                onCompleteCallback: _reactorView.Activate, 
-                jumpPower: animationData.LootSpawnJumpHeight,
-                maxDistance: animationData.LootSpawnSpreading,
-                duration: animationData.LootSpawnAnimationDuration,
-                ease: animationData.LootSpawnAnimationEase);
+            Sequence spawnAnimation = gameObject.JumpSpawn(_reactorView.Activate, animationData.LootSpawnParametersData);
             
             spawnAnimation.Play();
         }
@@ -48,11 +43,9 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
         private void StartUsing(InteractionActorView actor, InteractionReactorView reactorView)
         {
             Sequence jumpAnimation = reactorView.gameObject.JumpToObject(
-                destination: actor.LootPickTarget, 
-                onCompleteCallback: () => OnObjectUsed?.Invoke(gameObject),
-                jumpPower: animationData.LootPickJumpHeight,
-                duration: animationData.LootPickAnimationDuration,
-                ease: animationData.LootPickAnimationEase);
+                actor.LootPickTarget, 
+                () => OnObjectUsed?.Invoke(gameObject),
+                animationData.LootPickParametersData);
             jumpAnimation.Play();
         }
 

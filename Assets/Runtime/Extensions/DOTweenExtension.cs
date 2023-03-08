@@ -1,4 +1,5 @@
 using System;
+using AKhvalov.IdleFarm.Runtime.Data;
 using DG.Tweening;
 using Runtime.Data;
 using UnityEngine;
@@ -10,21 +11,19 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
     {
         //todo: make structure for parameters, remove magic numbers
         public static Sequence JumpSpawn(this GameObject target, Action onCompleteCallback, 
-            float maxDistance, 
-            float jumpPower, 
-            float duration, 
-            Ease ease)
+            LootSpawnParametersData data)
         {
-            var jumpDistance = (0.5f + Random.value/2) * maxDistance;
+            var jumpDistance = (0.5f + Random.value/2) * data.Spreading;
             var jumpDestination = new Vector3(Random.value, 0, Random.value).normalized * jumpDistance;
             jumpDestination += target.transform.position;
             
             Sequence result = DOTween.Sequence();
             result
-                .Append(target.transform.DOJump(jumpDestination, jumpPower, 1, duration))
+                .Append(target.transform.DOJump(jumpDestination, data.JumpHeight, 
+                    1, data.AnimationDuration))
                 .OnComplete(onCompleteCallback.Invoke);
             
-            result.SetEase(ease);
+            result.SetEase(data.AnimationEase);
             result.Pause();
 
             return result;
@@ -32,28 +31,20 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
         
         //todo: make structure for parameters, remove magic numbers
         public static Sequence JumpToObject(this GameObject target, GameObject destination, Action onCompleteCallback, 
-            float jumpPower, 
-            float duration, 
-            Ease ease)
+            LootPickParametersData data)
         {
             Sequence result = DOTween.Sequence();
             result
-                .Append(target.JumpSpawn(
-                    onCompleteCallback:() => target.transform.SetParent(destination.transform),
-                    jumpPower: jumpPower,
-                    maxDistance: 1f,
-                    duration: duration / 3, 
-                    ease: ease))
-                
-                .Join(target.transform.DOMove(Vector3.up * jumpPower, duration / 3))
-                .Append(target.transform.DOLocalJump(Vector3.zero, jumpPower, 1, duration * 2 / 3))
+                .Append(target.transform.DOJump(Vector3.up, data.JumpHeight, 1, data.JumpAnimationDuration))
+                .Join(target.transform.DOMove(Vector3.up * data.JumpHeight, data.JumpAnimationDuration))
+                .Append(target.transform.DOLocalJump(Vector3.zero, data.JumpHeight, 1, data.MoveToTargetAnimationDuration))
                 .OnComplete(() =>
                 {
                     target.transform.parent = null;
                     onCompleteCallback.Invoke();
                 });
 
-            result.SetEase(ease);
+            result.SetEase(data.AnimationEase);
             result.Pause();
 
             return result;
