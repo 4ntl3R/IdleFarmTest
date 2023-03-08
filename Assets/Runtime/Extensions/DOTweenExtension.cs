@@ -9,18 +9,20 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
 {
     public static class DOTweenExtension
     {
+        private const int DefaultJumpsAmount = 1;
+        
         //todo: make structure for parameters, remove magic numbers
         public static Sequence JumpSpawn(this GameObject target, Action onCompleteCallback, 
             LootSpawnParametersData data)
         {
-            var jumpDistance = (0.5f + Random.value/2) * data.Spreading;
+            var jumpDistance = Random.value * data.Spreading;
             var jumpDestination = new Vector3(Random.value, 0, Random.value).normalized * jumpDistance;
             jumpDestination += target.transform.position;
             
             Sequence result = DOTween.Sequence();
             result
                 .Append(target.transform.DOJump(jumpDestination, data.JumpHeight, 
-                    1, data.AnimationDuration))
+                    DefaultJumpsAmount, data.AnimationDuration))
                 .OnComplete(onCompleteCallback.Invoke);
             
             result.SetEase(data.AnimationEase);
@@ -35,9 +37,11 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
         {
             Sequence result = DOTween.Sequence();
             result
-                .Append(target.transform.DOJump(Vector3.up, data.JumpHeight, 1, data.JumpAnimationDuration))
-                .Join(target.transform.DOMove(Vector3.up * data.JumpHeight, data.JumpAnimationDuration))
-                .Append(target.transform.DOLocalJump(Vector3.zero, data.JumpHeight, 1, data.MoveToTargetAnimationDuration))
+                .Append(target.transform.DOMove(target.transform.position + Vector3.up * data.JumpHeight, 
+                    data.JumpAnimationDuration))
+                .AppendCallback(() => target.transform.SetParent(destination.transform))
+                .Append(target.transform.DOLocalJump(Vector3.zero, data.JumpHeight, DefaultJumpsAmount, 
+                    data.MoveToTargetAnimationDuration))
                 .OnComplete(() =>
                 {
                     target.transform.parent = null;
