@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using AKhvalov.IdleFarm.Runtime.Controllers;
+using AKhvalov.IdleFarm.Runtime.Data;
 using AKhvalov.IdleFarm.Runtime.Pool;
+using AKhvalov.IdleFarm.Runtime.Views;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AKhvalov.IdleFarm.Runtime
 {
@@ -12,14 +14,22 @@ namespace AKhvalov.IdleFarm.Runtime
 
         [SerializeField] 
         private InputJoystickController inputJoystickController;
-        
-        private GameObjectPool lootPool;
 
         [SerializeField] 
         private GameObject lootPrefab;
 
         [SerializeField] 
         private float playerSpeedMultiplier = 10f;
+
+        [SerializeField] 
+        private List<InteractionReactorView> _gatherables;
+
+        [SerializeField] 
+        private AnimationData _animationData;
+
+        private GameObjectPool _lootPool;
+
+        private GatherableController _gatherableController;
         
         
         private void Start()
@@ -36,7 +46,8 @@ namespace AKhvalov.IdleFarm.Runtime
         
         private void CreateClasses()
         {
-            lootPool = new GameObjectPool(lootPrefab);
+            _lootPool = new GameObjectPool(lootPrefab);
+            _gatherableController = new GatherableController(_lootPool, _gatherables, 1, _animationData.GrowParameters);
         }
 
         private void ManageInjections()
@@ -52,7 +63,8 @@ namespace AKhvalov.IdleFarm.Runtime
         private void DeleteSubscriptions()
         {
             inputJoystickController.OnJoystickDrag -= playerMovementView.ChangeVelocity;
-            lootPool.UnsubscribeEvents();
+            _lootPool.UnsubscribeEvents();
+            _gatherableController.UnsubscribeEvents();
         }
     }
 }
