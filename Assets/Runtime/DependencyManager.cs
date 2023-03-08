@@ -22,6 +22,9 @@ namespace AKhvalov.IdleFarm.Runtime
         private float playerSpeedMultiplier = 10f;
 
         [SerializeField] 
+        private int gatherableCapacity = 1;
+
+        [SerializeField] 
         private List<InteractionReactorView> _gatherables;
 
         [SerializeField] 
@@ -30,13 +33,14 @@ namespace AKhvalov.IdleFarm.Runtime
         private GameObjectPool _lootPool;
 
         private GatherableController _gatherableController;
+
+        private PlayerMovementController _playerMovementController;
         
         
         private void Start()
         {
             CreateClasses();
             ManageInjections();
-            AddSubscriptions();
         }
 
         private void OnDestroy()
@@ -47,7 +51,8 @@ namespace AKhvalov.IdleFarm.Runtime
         private void CreateClasses()
         {
             _lootPool = new GameObjectPool(lootPrefab);
-            _gatherableController = new GatherableController(_lootPool, _gatherables, 1, _animationData.GrowParameters);
+            _gatherableController = new GatherableController(_lootPool, _gatherables, gatherableCapacity, _animationData.GrowParameters);
+            _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
         }
 
         private void ManageInjections()
@@ -55,16 +60,11 @@ namespace AKhvalov.IdleFarm.Runtime
             playerMovementView.Inject(playerSpeedMultiplier);
         }
 
-        private void AddSubscriptions()
-        {
-            inputJoystickController.OnJoystickDrag += playerMovementView.ChangeVelocity;
-        }
-
         private void DeleteSubscriptions()
         {
-            inputJoystickController.OnJoystickDrag -= playerMovementView.ChangeVelocity;
             _lootPool.UnsubscribeEvents();
             _gatherableController.UnsubscribeEvents();
+            _playerMovementController.UnsubscribeEvents();
         }
     }
 }
