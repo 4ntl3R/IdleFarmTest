@@ -54,10 +54,5 @@ namespace AKhvalov.IdleFarm.Runtime
             inputJoystickController.OnJoystickDrag -= playerMovementView.ChangeVelocity;
             lootPool.UnsubscribeEvents();
         }
-
-        public void Test()
-        {
-            lootPool.GenerateObject(Vector3.forward * (Random.value * 5));
-        }
     }
 }
