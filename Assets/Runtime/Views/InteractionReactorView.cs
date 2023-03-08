@@ -11,13 +11,20 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         private const string ColliderAssertionString = "Collider attached to reactor {0} should be trigger";
         
         public event Action<InteractionActorView, InteractionReactorView> OnInteraction;
+        public event Action<InteractionActorView, InteractionReactorView> OnInteractionEnd;
+
 
         [SerializeField] 
         private InteractableType interactableType;
-        
+
+        [SerializeField] 
+        private Renderer _visualisation;
+
         private Collider _collider;
 
         public InteractableType InteractableType => interactableType;
+        
+        public Renderer Visualisation => _visualisation;
 
         private void Awake()
         {
@@ -41,5 +48,9 @@ namespace AKhvalov.IdleFarm.Runtime.Views
             _collider.enabled = true;
         }
 
+        public void EndInteraction(InteractionActorView actorView)
+        {
+            OnInteractionEnd?.Invoke(actorView, this);
+        }
     }
 }

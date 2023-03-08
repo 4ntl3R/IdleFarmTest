@@ -26,5 +26,10 @@ namespace AKhvalov.IdleFarm.Runtime.Views
             OnInteraction?.Invoke(this, _reactorView);
             _reactorView.Interact(this);
         }
+
+        public void EndInteraction(InteractionReactorView reactor)
+        {
+            reactor.EndInteraction(this);
+        }
     }
 }
