@@ -72,7 +72,7 @@ namespace AKhvalov.IdleFarm.Runtime
             
             _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData.GrowParameters);
             _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
-            _resourcesController = new ResourcesController(resourcesView, _resourcesModel, _lootPool);
+            _resourcesController = new ResourcesController(resourcesView, _resourcesModel);
             _playerInteractionController = new PlayerInteractionController(interactionActorView, _resourcesModel);
         }
 

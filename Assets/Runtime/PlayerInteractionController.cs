@@ -26,17 +26,19 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
 
         private void InteractionResolver(InteractionActorView actor, InteractionReactorView reactor)
         {
-            if (reactor.InteractableType == InteractableType.Gather)
+            switch (reactor.InteractableType)
             {
-                DOTweenExtension.SequenceDelay(0.25f, ()=>reactor.EndInteraction(actor));
-                return;
-            }
-
-            if (reactor.InteractableType == InteractableType.Loot)
-            {
-                if (!_resourcesModel.IsLootCapacityFilled)
+                case InteractableType.Gather:
+                    DOTweenExtension.SequenceDelay(0.25f, ()=>reactor.EndInteraction(actor));
+                    return;
+                case InteractableType.Loot:
                 {
-                    reactor.EndInteraction(actor);
+                    if (!_resourcesModel.IsLootCapacityFilled)
+                    {
+                        reactor.EndInteraction(actor);
+                        _resourcesModel.LootIncrease();
+                    }
+                    break;
                 }
             }
         }
