@@ -38,7 +38,13 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
                         reactor.EndInteraction(actor);
                         _resourcesModel.LootIncrease();
                     }
-                    break;
+
+                    return;
+                }
+                case InteractableType.Deliver:
+                {
+                    _resourcesModel.ConvertLootToCoins();
+                    return;
                 }
             }
         }
