@@ -4,7 +4,6 @@ using AKhvalov.IdleFarm.Runtime.Data;
 using AKhvalov.IdleFarm.Runtime.Models;
 using AKhvalov.IdleFarm.Runtime.Pool;
 using AKhvalov.IdleFarm.Runtime.Views;
-using DG.Tweening;
 using UnityEngine;
 
 namespace AKhvalov.IdleFarm.Runtime
@@ -40,14 +39,19 @@ namespace AKhvalov.IdleFarm.Runtime
 
         [SerializeField] 
         private ResourcesView resourcesView;
-        
-        
+
+        [SerializeField]
+        private InteractionActorView interactionActorView;
+
         private GameObjectPool _lootPool;
+        
         private GatherableController _gatherableController;
         private PlayerMovementController _playerMovementController;
-        private ResourcesModel _resourcesModel;
         private ResourcesController _resourcesController;
+        private PlayerInteractionController _playerInteractionController;
         
+        private ResourcesModel _resourcesModel;
+
         
         private void Start()
         {
@@ -63,10 +67,13 @@ namespace AKhvalov.IdleFarm.Runtime
         private void CreateClasses()
         {
             _lootPool = new GameObjectPool(lootPrefab);
+            
+            _resourcesModel = new ResourcesModel(lootCapacity, lootCost);
+            
             _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData.GrowParameters);
             _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
-            _resourcesModel = new ResourcesModel(lootCapacity, lootCost);
             _resourcesController = new ResourcesController(resourcesView, _resourcesModel, _lootPool);
+            _playerInteractionController = new PlayerInteractionController(interactionActorView, _resourcesModel);
         }
 
         private void ManageInjections()
@@ -78,9 +85,11 @@ namespace AKhvalov.IdleFarm.Runtime
         private void DeleteSubscriptions()
         {
             _lootPool.UnsubscribeEvents();
+            
             _gatherableController.UnsubscribeEvents();
             _playerMovementController.UnsubscribeEvents();
             _resourcesController.UnsubscribeEvents();
+            _playerInteractionController.UnsubscribeEvents();
         }
     }
 }
