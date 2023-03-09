@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
+using Object = UnityEngine.Object;
 
 namespace AKhvalov.IdleFarm.Runtime.Pool
 {
     public class GameObjectPool
     {
+        public event Action OnObjectDeactivated;
+        
         private Stack<IPoolable> _unactivatedObjects;
         private List<IPoolable> _activatedObjects;
 
@@ -20,7 +23,7 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
 
             #if UNITY_EDITOR
                 
-                Assert.IsTrue(poolablePrefab.TryGetComponent(typeof(IPoolable), out _));
+                UnityEngine.Assertions.Assert.IsTrue(poolablePrefab.TryGetComponent(typeof(IPoolable), out _));
                     
             #endif
         }
@@ -73,6 +76,7 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
             _activatedObjects.Remove(poolable);
             poolable.Deactivate();
             _unactivatedObjects.Push(poolable);
+            OnObjectDeactivated?.Invoke();
         }
     }
 }
