@@ -2,6 +2,7 @@ using System;
 using AKhvalov.IdleFarm.Runtime.Data;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace AKhvalov.IdleFarm.Runtime.Views
 {
@@ -13,18 +14,20 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         public event Action<InteractionActorView, InteractionReactorView> OnInteraction;
         public event Action<InteractionActorView, InteractionReactorView> OnInteractionEnd;
 
+        [SerializeField] 
+        private bool isToggleable = true;
 
         [SerializeField] 
         private InteractableType interactableType;
 
         [SerializeField] 
-        private Renderer _visualisation;
+        private Renderer visualisation;
 
         private Collider _collider;
 
         public InteractableType InteractableType => interactableType;
         
-        public Renderer Visualisation => _visualisation;
+        public Renderer Visualisation => visualisation;
 
         private void Awake()
         {
@@ -39,13 +42,19 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         public void Interact(InteractionActorView actorView)
         {
-            _collider.enabled = false;
+            if (isToggleable)
+            {
+                _collider.enabled = false;
+            }
             OnInteraction?.Invoke(actorView, this);
         }
 
         public void Activate()
         {
-            _collider.enabled = true;
+            if (isToggleable)
+            {
+                _collider.enabled = true;
+            }
         }
 
         public void EndInteraction(InteractionActorView actorView)
