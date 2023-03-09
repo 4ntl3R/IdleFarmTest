@@ -18,7 +18,7 @@ namespace Runtime.Models
 
         public void Use()
         {
-            if (_currentCapacity-- <= 0)
+            if (--_currentCapacity <= 0)
             {
                 OnEmpty?.Invoke(this);
                 return;
