@@ -8,7 +8,7 @@ using UnityEngine;
 namespace AKhvalov.IdleFarm.Runtime.Pool
 {
     [RequireComponent(typeof(InteractionReactorView))]
-    public class PoolableLoot : InitiatableMonoBehaviour, IPoolable
+    public class PoolableLoot : MonoBehaviour, IPoolable
     {
         public event Action<GameObject> OnObjectUsed;
 
@@ -17,9 +17,14 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
 
         private InteractionReactorView _reactorView;
         
+        private void Awake()
+        {
+            _reactorView = GetComponent<InteractionReactorView>();
+            _reactorView.OnInteraction += StartUsing;
+        }
+        
         public void Activate(Vector3 position)
         {
-            Initiate();
             transform.position = position;
             gameObject.SetActive(true);
             
@@ -31,13 +36,6 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
         public void Deactivate()
         {
             gameObject.SetActive(false);
-        }
-        
-        protected override void Initiate()
-        {
-            base.Initiate();
-            _reactorView = GetComponent<InteractionReactorView>();
-            _reactorView.OnInteraction += StartUsing;
         }
 
         private void StartUsing(InteractionActorView actor, InteractionReactorView reactorView)
