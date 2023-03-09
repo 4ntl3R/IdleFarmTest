@@ -20,7 +20,7 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
         private void Awake()
         {
             _reactorView = GetComponent<InteractionReactorView>();
-            _reactorView.OnInteraction += StartUsing;
+            _reactorView.OnInteractionEnd += StartUsing;
         }
         
         public void Activate(Vector3 position)
@@ -49,7 +49,7 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
 
         private void OnDestroy()
         {
-            _reactorView.OnInteraction -= StartUsing;
+            _reactorView.OnInteractionEnd -= StartUsing;
         }
     }
 }
