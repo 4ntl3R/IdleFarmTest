@@ -43,6 +43,9 @@ namespace AKhvalov.IdleFarm.Runtime
         [SerializeField]
         private InteractionActorView interactionActorView;
 
+        [SerializeField] 
+        private PlayerAnimationView playerAnimationView;
+
         private GameObjectPool _lootPool;
         
         private GatherableController _gatherableController;
@@ -80,6 +83,7 @@ namespace AKhvalov.IdleFarm.Runtime
         {
             playerMovementView.Inject(playerSpeedMultiplier);
             resourcesView.Inject(lootCapacity);
+            playerAnimationView.Inject(inputJoystickController, animationData.PlayerAnimationParametersData);
         }
 
         private void DeleteSubscriptions()

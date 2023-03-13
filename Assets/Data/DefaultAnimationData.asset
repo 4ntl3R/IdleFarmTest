@@ -31,3 +31,11 @@ MonoBehaviour:
     jumpAnimationDuration: 0.3
     jumpHeight: 3
     animationEase: 2
+  playerAnimationParametersData:
+    velocityMovingThreshold: 0.1
+    velocityRunningThreshold: 0.66
+    walkingMinSpeed: 0.1
+    walkingMaxSpeed: 2
+    runningMinSpeed: 0.75
+    runningMaxSpeed: 1.33
+    gatheringDuration: 0.25
