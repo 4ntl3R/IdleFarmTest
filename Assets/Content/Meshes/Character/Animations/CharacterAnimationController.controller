@@ -17,7 +17,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.019568563
   m_TransitionOffset: 0
   m_ExitTime: 0.8739496
   m_HasExitTime: 1
@@ -231,7 +231,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Harvesting
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4927114214140316423}
@@ -323,7 +323,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 444064eb4d767f745b713e200ec5eed9, type: 2}
+  m_Motion: {fileID: 7400000, guid: f57bbbbeb0ebb804f836751f491ccdd1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -405,7 +405,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 56b3a2617d3663c4db3678f4fab1dc95, type: 2}
+  m_Motion: {fileID: 7400000, guid: b603d564848f2ee4caa0633f1cf889b2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
