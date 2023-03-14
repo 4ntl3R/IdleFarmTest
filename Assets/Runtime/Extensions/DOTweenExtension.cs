@@ -92,8 +92,22 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
                 .AppendInterval(duration)
                 .OnComplete(delayedAction.Invoke);
         }
-        
-        public static TweenerCore<float, float, FloatOptions> DOMoveToTarget(this Transform target, Transform destination, float duration, Ease ease)
+
+        public static Sequence MoveToStaticTarget(this GameObject target, GameObject destination, 
+            Action onCompleteCallback, LootDeliverParametersData data)
+        {
+            Sequence result = DOTween.Sequence();
+            result
+                .Append(target.transform.DOMove(destination.transform.position, data.Duration))
+                .OnComplete(onCompleteCallback.Invoke);
+            
+            result.SetEase(data.Ease);
+            result.Pause();
+
+            return result;
+        }
+
+        private static TweenerCore<float, float, FloatOptions> DOMoveToTarget(this Transform target, Transform destination, float duration, Ease ease)
         {
             var startPosition = target.transform.position;
             var startMagnitude = (destination.position - startPosition).magnitude;
