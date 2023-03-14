@@ -1,8 +1,8 @@
 using System;
 using AKhvalov.IdleFarm.Runtime.Data;
+using AKhvalov.IdleFarm.Runtime.Data.Enums;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Serialization;
 
 namespace AKhvalov.IdleFarm.Runtime.Views
 {
@@ -16,6 +16,9 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         [SerializeField] 
         private bool isToggleable = true;
+
+        [SerializeField] 
+        private ToggleType toggleType = ToggleType.OnInteractionStart;
 
         [SerializeField] 
         private InteractableType interactableType;
@@ -42,7 +45,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         public void Interact(InteractionActorView actorView)
         {
-            if (isToggleable)
+            if (isToggleable & toggleType == ToggleType.OnInteractionStart)
             {
                 _collider.enabled = false;
             }
@@ -59,6 +62,10 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         public void EndInteraction(InteractionActorView actorView)
         {
+            if (isToggleable & toggleType == ToggleType.OnInteractionEnd)
+            {
+                _collider.enabled = false;
+            }
             OnInteractionEnd?.Invoke(actorView, this);
         }
     }

@@ -9,27 +9,44 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
 {
     public class PlayerInteractionController
     {
-        private readonly InteractionActorView _actor;
+        private readonly float _hitBoxDuration;
+        private readonly InteractionActorView _player;
+        private readonly InteractionActorView _gatherHitBox;
+        private readonly PlayerAnimationView _playerAnimationView;
         private readonly ResourcesModel _resourcesModel;
 
-        public PlayerInteractionController(InteractionActorView actor, ResourcesModel resourcesModel)
+        public PlayerInteractionController(InteractionActorView player, InteractionActorView gatherHitBox,
+            ResourcesModel resourcesModel, PlayerAnimationView animationView, float hitBoxDuration)
         {
-            _actor = actor;
+            _player = player;
+            _gatherHitBox = gatherHitBox;
+            _hitBoxDuration = hitBoxDuration;
             _resourcesModel = resourcesModel;
-            _actor.OnInteraction += InteractionResolver;
+            _playerAnimationView = animationView;
+            SubscribeEvents();
         }
+        
 
         public void UnsubscribeEvents()
         {
-            _actor.OnInteraction -= InteractionResolver;
+            _player.OnInteraction -= InteractionResolve;
+            _playerAnimationView.OnGather -= GatherResolve;
+            _gatherHitBox.OnInteraction -= HitBoxResolve;
         }
 
-        private void InteractionResolver(InteractionActorView actor, InteractionReactorView reactor)
+        private void SubscribeEvents()
+        {
+            _player.OnInteraction += InteractionResolve;
+            _playerAnimationView.OnGather += GatherResolve;
+            _gatherHitBox.OnInteraction += HitBoxResolve;
+        }
+
+        private void InteractionResolve(InteractionActorView actor, InteractionReactorView reactor)
         {
             switch (reactor.InteractableType)
             {
                 case InteractableType.Gather:
-                    DOTweenExtension.SequenceDelay(0.25f, ()=>reactor.EndInteraction(actor));
+                    _playerAnimationView.StartGatherAnimation();
                     return;
                 case InteractableType.Loot:
                 {
@@ -47,6 +64,22 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
                     return;
                 }
             }
+        }
+
+        private void ToggleHitBox(bool newState)
+        {
+            _gatherHitBox.ToggleInteractions(newState);
+        }
+
+        private void GatherResolve()
+        {
+            ToggleHitBox(true);
+            DOTweenExtension.SequenceDelay(_hitBoxDuration, () => ToggleHitBox(false));
+        }
+
+        private void HitBoxResolve(InteractionActorView actor, InteractionReactorView reactor)
+        {
+            reactor.EndInteraction(actor);
         }
     }
 }

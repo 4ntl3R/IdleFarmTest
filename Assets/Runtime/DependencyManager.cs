@@ -32,6 +32,9 @@ namespace AKhvalov.IdleFarm.Runtime
         private int lootCost = 1;
 
         [SerializeField] 
+        private float hitBoxDuration = 0.1f;
+
+        [SerializeField] 
         private List<InteractionReactorView> gatherables;
 
         [SerializeField] 
@@ -42,6 +45,9 @@ namespace AKhvalov.IdleFarm.Runtime
 
         [SerializeField]
         private InteractionActorView interactionActorView;
+
+        [SerializeField] 
+        private InteractionActorView gatherHitBox;
 
         [SerializeField] 
         private PlayerAnimationView playerAnimationView;
@@ -76,7 +82,7 @@ namespace AKhvalov.IdleFarm.Runtime
             _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData.GrowParameters);
             _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
             _resourcesController = new ResourcesController(resourcesView, _resourcesModel);
-            _playerInteractionController = new PlayerInteractionController(interactionActorView, _resourcesModel);
+            _playerInteractionController = new PlayerInteractionController(interactionActorView, gatherHitBox, _resourcesModel, playerAnimationView, hitBoxDuration);
         }
 
         private void ManageInjections()

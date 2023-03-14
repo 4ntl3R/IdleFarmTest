@@ -13,6 +13,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         
         private static readonly int MoveAnimationSpeedID = Animator.StringToHash("MoveAnimationSpeed");
         private static readonly int MovingTypeID = Animator.StringToHash("MovingType");
+        private static readonly int InteractID = Animator.StringToHash("Interact");
 
         public event Action OnGather;
         
@@ -33,6 +34,11 @@ namespace AKhvalov.IdleFarm.Runtime.Views
             _joystick = joystickController;
             _parameters = parametersData;
             SubscribeEvents();
+        }
+
+        public void StartGatherAnimation()
+        {
+            animator.SetTrigger(InteractID);
         }
 
         private void OnDestroy()
