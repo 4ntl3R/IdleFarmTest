@@ -24,6 +24,7 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             result
                 .Append(target.transform.DOJump(jumpDestination, data.JumpHeight, 
                     DefaultJumpsAmount, data.AnimationDuration))
+                .Join(target.transform.DORotate(data.SpawnRotation, data.AnimationDuration))
                 .OnComplete(onCompleteCallback.Invoke);
             
             result.SetEase(data.AnimationEase);
@@ -42,6 +43,7 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             result
                 .Append(target.transform.DOMoveToTarget(destination.transform, data.MoveToTargetAnimationDuration,
                     data.AnimationEase))
+                .Append(target.transform.DORotate(Vector3.zero, data.MoveToTargetAnimationDuration))
                 .AppendCallback(() => target.transform.SetParent(destination.transform))
                 .Append(target.transform.DOLocalJump(Vector3.zero, data.JumpHeight, DefaultJumpsAmount,
                     data.JumpAnimationDuration))
@@ -52,6 +54,7 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
                     onCompleteCallback.Invoke();
                     target.transform.SetParent(null);
                     target.transform.localScale = startScale;
+                    target.transform.rotation = Quaternion.identity;
                 })
                 .Append(destination.transform.DOPunchScale(data.BagPunchPower, data.BagPunchDuration,
                     data.BagPunchVibrato, data.BagPunchElastic))
@@ -94,10 +97,11 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
         {
             var startPosition = target.transform.position;
             var startMagnitude = (destination.position - startPosition).magnitude;
+            var offset = (Vector3.right + Vector3.forward).RandomVector().normalized + Vector3.up;
             var toTween = DOTween
                 .To(
-                () => ((destination.position - target.position).magnitude / startMagnitude), 
-                x => target.position = Vector3.Lerp(startPosition, destination.transform.position, (1 - x)),
+                () => ((destination.position + offset - target.position).magnitude / startMagnitude), 
+                x => target.position = Vector3.Lerp(startPosition, destination.position + offset, (1 - x)),
             0, duration)
                 .SetEase(ease);
             return toTween;
