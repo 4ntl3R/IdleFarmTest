@@ -6,7 +6,7 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
     public interface IPoolable
     {
         event Action<GameObject> OnObjectUsed; 
-        void Activate(Vector3 position);
+        void Activate(PoolableActivationData data);
         void Deactivate();
     }
 }

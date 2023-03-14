@@ -1,6 +1,6 @@
 using System;
 
-namespace Runtime.Models
+namespace AKhvalov.IdleFarm.Runtime.Models
 {
     public class GatherableModel
     {

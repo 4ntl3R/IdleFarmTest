@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Runtime.Data
+namespace AKhvalov.IdleFarm.Runtime.Data
 {
     [Serializable]
     public struct GrowAnimationParametersData

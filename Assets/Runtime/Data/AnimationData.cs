@@ -1,5 +1,3 @@
-using DG.Tweening;
-using Runtime.Data;
 using UnityEngine;
 
 namespace AKhvalov.IdleFarm.Runtime.Data

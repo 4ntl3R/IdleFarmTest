@@ -23,9 +23,9 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
             _reactorView.OnInteractionEnd += StartUsing;
         }
         
-        public void Activate(Vector3 position)
+        public void Activate(PoolableActivationData data)
         {
-            transform.position = position;
+            transform.position = data.Position;
             gameObject.SetActive(true);
             
             Sequence spawnAnimation = gameObject.JumpSpawn(_reactorView.Activate, animationData.LootSpawnParametersData);

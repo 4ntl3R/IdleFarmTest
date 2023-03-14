@@ -28,11 +28,11 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
             #endif
         }
 
-        public void GenerateObject(Vector3 position)
+        public void GenerateObject(PoolableActivationData data)
         {
             var generatedObject = _unactivatedObjects.Count == 0 
-                ? InstantiateNew(position) 
-                : ActivateUsed(position);
+                ? InstantiateNew(data) 
+                : ActivateUsed(data);
         }
 
         public void UnsubscribeEvents()
@@ -48,23 +48,23 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
             }
         }
 
-        private IPoolable InstantiateNew(Vector3 position)
+        private IPoolable InstantiateNew(PoolableActivationData data)
         {
             var instantiated = Object.Instantiate(_poolablePrefab, Vector3.zero, Quaternion.identity);
             var deactivated = instantiated.GetComponent<IPoolable>();
             deactivated.OnObjectUsed += DeactivateObject;
-            return ActivateObject(position, deactivated);
+            return ActivateObject(data, deactivated);
         }
 
-        private IPoolable ActivateUsed(Vector3 position)
+        private IPoolable ActivateUsed(PoolableActivationData data)
         {
             var deactivated = _unactivatedObjects.Pop();
-            return ActivateObject(position, deactivated);
+            return ActivateObject(data, deactivated);
         }
 
-        private IPoolable ActivateObject(Vector3 position, IPoolable deactivated)
+        private IPoolable ActivateObject(PoolableActivationData data, IPoolable deactivated)
         {
-            deactivated.Activate(position);
+            deactivated.Activate(data);
             _activatedObjects.Add(deactivated);
             
             return deactivated;

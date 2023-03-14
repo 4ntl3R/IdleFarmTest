@@ -3,7 +3,6 @@ using AKhvalov.IdleFarm.Runtime.Data;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using Runtime.Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

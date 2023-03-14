@@ -20,6 +20,12 @@ namespace AKhvalov.IdleFarm.Runtime
         private GameObject lootPrefab;
 
         [SerializeField] 
+        private GameObject lootDeliveryPrefab;
+
+        [SerializeField] 
+        private GameObject deliveryTarget;
+
+        [SerializeField] 
         private float playerSpeedMultiplier = 10f;
 
         [SerializeField] 
@@ -53,6 +59,7 @@ namespace AKhvalov.IdleFarm.Runtime
         private PlayerAnimationView playerAnimationView;
 
         private GameObjectPool _lootPool;
+        private GameObjectPool _lootDeliveryPool;
         
         private GatherableController _gatherableController;
         private PlayerMovementController _playerMovementController;
@@ -76,12 +83,14 @@ namespace AKhvalov.IdleFarm.Runtime
         private void CreateClasses()
         {
             _lootPool = new GameObjectPool(lootPrefab);
+            _lootDeliveryPool = new GameObjectPool(lootDeliveryPrefab);
             
             _resourcesModel = new ResourcesModel(lootCapacity, lootCost);
             
             _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData.GrowParameters);
             _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
-            _resourcesController = new ResourcesController(resourcesView, _resourcesModel);
+            _resourcesController = new ResourcesController(resourcesView, _resourcesModel, _lootDeliveryPool, 
+                interactionActorView, deliveryTarget, animationData.LootDeliverParametersData);
             _playerInteractionController = new PlayerInteractionController(interactionActorView, gatherHitBox, _resourcesModel, playerAnimationView, hitBoxDuration);
         }
 

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using AKhvalov.IdleFarm.Runtime.Data;
 using AKhvalov.IdleFarm.Runtime.Extensions;
+using AKhvalov.IdleFarm.Runtime.Models;
 using AKhvalov.IdleFarm.Runtime.Pool;
 using AKhvalov.IdleFarm.Runtime.Views;
 using DG.Tweening;
-using Runtime.Data;
-using Runtime.Models;
 
 namespace AKhvalov.IdleFarm.Runtime.Controllers
 {
@@ -55,7 +55,7 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         {
             var model = _viewModelDictionary[reactorView];
             model.Use();
-            _lootPool.GenerateObject(reactorView.transform.position);
+            _lootPool.GenerateObject(new PoolableActivationData(reactorView.transform.position));
         }
 
         private void ResetGatherable(GatherableModel sender)

@@ -5,7 +5,7 @@ namespace AKhvalov.IdleFarm.Runtime.Models
     public class ResourcesModel
     {
         public event Action OnLootFilled;
-        public event Action OnLootCleared;
+        public event Action<int> OnLootCleared;
         public event Action<int, int> OnCoinsUpdated;
         public event Action<int, int> OnLootUpdated;
         
@@ -44,8 +44,8 @@ namespace AKhvalov.IdleFarm.Runtime.Models
             _coinsCount += _lootCost * _currentLootCount;
             OnCoinsUpdated?.Invoke(beforeCoins, _coinsCount);
 
+            OnLootCleared?.Invoke(_currentLootCount);
             _currentLootCount = 0;
-            OnLootCleared?.Invoke();
             OnLootUpdated?.Invoke(_currentLootCount, _maxLootCount);
         }
     }

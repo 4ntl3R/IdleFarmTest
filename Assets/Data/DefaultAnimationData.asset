@@ -26,11 +26,18 @@ MonoBehaviour:
     animationDuration: 0.5
     jumpHeight: 1
     animationEase: 2
+    spawnRandomRotation: {x: 45, y: 45, z: 45}
   lootPickParametersData:
-    fullAnimationDuration: 1
+    fullAnimationDuration: 0.7
     jumpAnimationDuration: 0.3
-    jumpHeight: 3
+    jumpHeight: 2
+    jumpHeightRandomRange: 0.5
+    toBagScale: 0.5
     animationEase: 2
+    bagPunchDuration: 0.25
+    bagPunchPower: {x: 0.05, y: 0.1, z: 0.05}
+    bagPunchVibrato: 1
+    bagPunchElastic: 2
   playerAnimationParametersData:
     velocityMovingThreshold: 0.1
     velocityRunningThreshold: 0.66
@@ -39,3 +46,8 @@ MonoBehaviour:
     runningMinSpeed: 0.75
     runningMaxSpeed: 1.33
     gatheringDuration: 0.25
+  lootDeliverParametersData:
+    duration: 1
+    ease: 2
+    basicTimeInterval: 0.1
+    intervalRandomRange: 0.05
