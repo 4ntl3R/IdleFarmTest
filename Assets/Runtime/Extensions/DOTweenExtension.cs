@@ -1,6 +1,8 @@
 using System;
 using AKhvalov.IdleFarm.Runtime.Data;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using Runtime.Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,7 +13,6 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
     {
         private const int DefaultJumpsAmount = 1;
         
-        //todo: make structure for parameters, remove magic numbers
         public static Sequence JumpSpawn(this GameObject target, Action onCompleteCallback, 
             LootSpawnParametersData data)
         {
@@ -31,22 +32,30 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             return result;
         }
         
-        //todo: make structure for parameters, remove magic numbers
         public static Sequence JumpToObject(this GameObject target, GameObject destination, Action onCompleteCallback, 
-            LootPickParametersData data)
+            LootPickParametersData data, Vector3 bagScale)
         {
+            Vector3 startScale = target.transform.localScale;
+            Vector3 toBagScaleMaxValue = startScale.TermDivision(bagScale);
+
             Sequence result = DOTween.Sequence();
             result
-                .Append(target.transform.DOMove(target.transform.position + Vector3.up * data.JumpHeight, 
-                    data.JumpAnimationDuration))
+                .Append(target.transform.DOMoveToTarget(destination.transform, data.MoveToTargetAnimationDuration,
+                    data.AnimationEase))
                 .AppendCallback(() => target.transform.SetParent(destination.transform))
-                .Append(target.transform.DOLocalJump(Vector3.zero, data.JumpHeight, DefaultJumpsAmount, 
-                    data.MoveToTargetAnimationDuration))
-                .OnComplete(() =>
+                .Append(target.transform.DOLocalJump(Vector3.zero, data.JumpHeight, DefaultJumpsAmount,
+                    data.JumpAnimationDuration))
+                .Join(target.transform.DOScale(Vector3.Lerp(Vector3.zero, toBagScaleMaxValue, data.ToBagScale),
+                    data.JumpAnimationDuration))
+                .AppendCallback(() =>
                 {
-                    target.transform.parent = null;
                     onCompleteCallback.Invoke();
-                });
+                    target.transform.SetParent(null);
+                    target.transform.localScale = startScale;
+                })
+                .Append(destination.transform.DOPunchScale(data.BagPunchPower, data.BagPunchDuration,
+                    data.BagPunchVibrato, data.BagPunchElastic))
+                .OnComplete((() => destination.transform.localScale = bagScale));
 
             result.SetEase(data.AnimationEase);
             result.Pause();
@@ -79,6 +88,19 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             sequence
                 .AppendInterval(duration)
                 .OnComplete(delayedAction.Invoke);
+        }
+        
+        public static TweenerCore<float, float, FloatOptions> DOMoveToTarget(this Transform target, Transform destination, float duration, Ease ease)
+        {
+            var startPosition = target.transform.position;
+            var startMagnitude = (destination.position - startPosition).magnitude;
+            var toTween = DOTween
+                .To(
+                () => ((destination.position - target.position).magnitude / startMagnitude), 
+                x => target.position = Vector3.Lerp(startPosition, destination.transform.position, (1 - x)),
+            0, duration)
+                .SetEase(ease);
+            return toTween;
         }
     }
 }

@@ -15,6 +15,9 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         [SerializeField] 
         private InteractableType interactableType;
 
+        public Vector3 LootPickTargetScale => _lootPickTargetScale;
+
+        private Vector3 _lootPickTargetScale;
         private Collider _collider;
         private InteractionReactorView _reactorView;
 
@@ -22,6 +25,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         private void Awake()
         {
+            _lootPickTargetScale = lootPickTarget.transform.localScale;
             _collider = GetComponent<Collider>();
         }
 

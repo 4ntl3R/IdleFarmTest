@@ -43,7 +43,8 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
             Sequence jumpAnimation = reactorView.gameObject.JumpToObject(
                 actor.LootPickTarget, 
                 () => OnObjectUsed?.Invoke(gameObject),
-                animationData.LootPickParametersData);
+                animationData.LootPickParametersData,
+                actor.LootPickTargetScale);
             jumpAnimation.Play();
         }
 
