@@ -93,12 +93,11 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
                 .OnComplete(delayedAction.Invoke);
         }
 
-        public static Sequence MoveToStaticTarget(this GameObject target, GameObject destination, 
-            Action onCompleteCallback, LootDeliverParametersData data)
+        public static Sequence MoveToStaticTarget(this GameObject target, Action onCompleteCallback, LootDeliverParametersData data)
         {
             Sequence result = DOTween.Sequence();
             result
-                .Append(target.transform.DOMove(destination.transform.position, data.Duration))
+                .Append(target.transform.DOLocalMove(Vector3.zero, data.Duration))
                 .OnComplete(onCompleteCallback.Invoke);
             
             result.SetEase(data.Ease);

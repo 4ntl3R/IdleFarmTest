@@ -164,6 +164,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinText: {fileID: 4409339953637777233}
   _lootText: {fileID: 5768842940222770113}
+--- !u!1 &4619776231162429767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7473729262928519555}
+  m_Layer: 5
+  m_Name: CoinTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7473729262928519555
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619776231162429767}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5334753959039975511}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5497932719340044518
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +680,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7686f1d0d7116ae49a2a86490c531ae9, type: 3}
     - target: {fileID: 5444136651776742206, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
       propertyPath: m_text
-      value: 153
+      value: 000
       objectReference: {fileID: 0}
     - target: {fileID: 5444136651776742206, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -777,6 +812,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5c699f7f2492f114e875010b952c202a, type: 3}
     - target: {fileID: 5444136651776742206, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
+      propertyPath: m_text
+      value: 000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444136651776742206, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
@@ -797,6 +836,11 @@ PrefabInstance:
 --- !u!224 &5990892758641790618 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2711034049477985013, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
+  m_PrefabInstance: {fileID: 8555830093796215919}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &5334753959039975511 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4374315020423384120, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
   m_PrefabInstance: {fileID: 8555830093796215919}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4409339953637777233 stripped

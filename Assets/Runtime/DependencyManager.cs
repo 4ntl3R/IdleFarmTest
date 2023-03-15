@@ -17,6 +17,12 @@ namespace AKhvalov.IdleFarm.Runtime
         private InputJoystickController inputJoystickController;
 
         [SerializeField] 
+        private GameObject coinPrefab;
+
+        [SerializeField]
+        private GameObject coinTarget;
+
+        [SerializeField] 
         private GameObject lootPrefab;
 
         [SerializeField] 
@@ -60,6 +66,7 @@ namespace AKhvalov.IdleFarm.Runtime
 
         private GameObjectPool _lootPool;
         private GameObjectPool _lootDeliveryPool;
+        private GameObjectPool _coinPool;
         
         private GatherableController _gatherableController;
         private PlayerMovementController _playerMovementController;
@@ -84,13 +91,14 @@ namespace AKhvalov.IdleFarm.Runtime
         {
             _lootPool = new GameObjectPool(lootPrefab);
             _lootDeliveryPool = new GameObjectPool(lootDeliveryPrefab);
+            _coinPool = new GameObjectPool(coinPrefab);
             
             _resourcesModel = new ResourcesModel(lootCapacity, lootCost);
             
             _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData.GrowParameters);
             _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
             _resourcesController = new ResourcesController(resourcesView, _resourcesModel, _lootDeliveryPool, 
-                interactionActorView, deliveryTarget, animationData.LootDeliverParametersData);
+                interactionActorView, deliveryTarget, animationData.LootDeliverParametersData, coinTarget, _coinPool);
             _playerInteractionController = new PlayerInteractionController(interactionActorView, gatherHitBox, _resourcesModel, playerAnimationView, hitBoxDuration);
         }
 

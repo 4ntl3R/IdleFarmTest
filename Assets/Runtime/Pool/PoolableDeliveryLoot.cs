@@ -15,12 +15,17 @@ namespace AKhvalov.IdleFarm.Runtime.Pool
         
         public void Activate(PoolableActivationData data)
         {
+            transform.SetParent(data.Parent);
             transform.position = data.Position;
             gameObject.SetActive(true);
+
             
             Sequence spawnAnimation = gameObject.MoveToStaticTarget(
-                data.Parent.gameObject, 
-                (() => OnObjectUsed?.Invoke(gameObject)), 
+                (() =>
+                {
+                    OnObjectUsed?.Invoke(gameObject);
+                    transform.SetParent(null);
+                }), 
                 (animationData.LootDeliverParametersData));
             
             spawnAnimation.Play();

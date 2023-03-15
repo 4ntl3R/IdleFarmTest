@@ -48,5 +48,10 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         {
             _lootText.text = string.Format(LootTextTemplate, currentValue, maxValue);
         }
+
+        public void AnimateCoin()
+        {
+            
+        }
     }
 }

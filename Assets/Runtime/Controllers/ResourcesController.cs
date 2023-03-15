@@ -13,13 +13,19 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         private readonly ResourcesModel _model;
         private readonly GameObject _deliverySource;
         private readonly GameObject _deliveryTarget;
+        private readonly GameObject _coinTarget;
         private readonly GameObjectPool _deliveryPool;
+        private readonly GameObjectPool _coinPool;
         private readonly LootDeliverParametersData _data;
+        private readonly Camera _camera;
 
         private int _deliveryCounter = 0;
         private bool _isDelivering = false;
-    
-        public ResourcesController(ResourcesView view, ResourcesModel model, GameObjectPool deliveryLootPool, InteractionActorView deliverySource, GameObject deliveryTarget, LootDeliverParametersData deliverParametersData)
+
+        public ResourcesController(ResourcesView view, ResourcesModel model, GameObjectPool deliveryLootPool,
+            InteractionActorView deliverySource, GameObject deliveryTarget,
+            LootDeliverParametersData deliverParametersData,
+            GameObject coinTarget, GameObjectPool coinPool)
         {
             _view = view;
             _model = model;
@@ -27,6 +33,9 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
             _deliverySource = deliverySource.LootPickTarget;
             _deliveryTarget = deliveryTarget;
             _data = deliverParametersData;
+            _coinTarget = coinTarget;
+            _coinPool = coinPool;
+            _camera = Camera.main;
             SubscribeEvents();
         }
 
@@ -61,7 +70,8 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         private void AnimateLoot()
         {
             _deliveryCounter--;
-            _deliveryPool.GenerateObject(CreateCurrentData());
+            _deliveryPool.GenerateObject(CreateDeliveryData());
+            _coinPool.GenerateObject(CreateCoinData());
             
             if (_deliveryCounter > 0)
             {
@@ -72,9 +82,15 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
             _isDelivering = false;
         }
 
-        private PoolableActivationData CreateCurrentData()
+        private PoolableActivationData CreateDeliveryData()
         {
             return new PoolableActivationData(_deliverySource.transform.position, _deliveryTarget.transform);
+        }
+
+        private PoolableActivationData CreateCoinData()
+        {
+            var sourcePosition = _camera.WorldToScreenPoint(_deliveryTarget.transform.position);
+            return new PoolableActivationData(sourcePosition, _coinTarget.transform);
         }
     }
 }
