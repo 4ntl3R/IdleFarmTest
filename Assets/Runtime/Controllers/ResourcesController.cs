@@ -19,12 +19,12 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         private int _deliveryCounter = 0;
         private bool _isDelivering = false;
     
-        public ResourcesController(ResourcesView view, ResourcesModel model, GameObjectPool deliveryLootPool, InteractionActorView player, GameObject deliveryTarget, LootDeliverParametersData deliverParametersData)
+        public ResourcesController(ResourcesView view, ResourcesModel model, GameObjectPool deliveryLootPool, InteractionActorView deliverySource, GameObject deliveryTarget, LootDeliverParametersData deliverParametersData)
         {
             _view = view;
             _model = model;
             _deliveryPool = deliveryLootPool;
-            _deliverySource = player.LootPickTarget;
+            _deliverySource = deliverySource.LootPickTarget;
             _deliveryTarget = deliveryTarget;
             _data = deliverParametersData;
             SubscribeEvents();

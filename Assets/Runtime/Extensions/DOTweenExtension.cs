@@ -3,6 +3,7 @@ using AKhvalov.IdleFarm.Runtime.Data;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -103,6 +104,31 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             result.SetEase(data.Ease);
             result.Pause();
 
+            return result;
+        }
+
+        public static Sequence DOUpdateCounter(this TextMeshProUGUI textMeshPro, Action onCompeteCallback,
+            TextChangeParametersData textData, UIAnimationParametersData data)
+        {
+            Sequence result = DOTween.Sequence();
+            result
+                .Append(textMeshPro
+                    .DOTextInteger(textData.StartValue, textData.EndValue, textData.Duration)
+                    .SetEase(data.TextEase))
+                .OnComplete(onCompeteCallback.Invoke);
+            result.Pause();
+            return result;
+        }
+
+        private static TweenerCore<int, int, NoOptions> DOTextInteger
+            (this TextMeshProUGUI textMeshPro, int start, int end, float duration)
+        {
+            textMeshPro.text = start.ToString();
+            var result = DOTween.To(
+                () => int.Parse(textMeshPro.text), 
+                x => textMeshPro.text = x.ToString(), 
+                end, 
+                duration);
             return result;
         }
 

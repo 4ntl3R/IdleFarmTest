@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   growParameters:
     targetScale: {x: 1, y: 2, z: 1}
-    targetColor: {r: 1, g: 1, b: 0, a: 0}
-    startColor: {r: 0, g: 1, b: 0.2509804, a: 0}
+    targetColor: {r: 1, g: 1, b: 0, a: 1}
+    startColor: {r: 0, g: 1, b: 0.2509804, a: 1}
     fullDuration: 10
     finalDuration: 0.5
     growMaxColorLerp: 0.5
@@ -51,3 +51,5 @@ MonoBehaviour:
     ease: 2
     basicTimeInterval: 0.1
     intervalRandomRange: 0.05
+  uiAnimationParametersData:
+    textEase: 11

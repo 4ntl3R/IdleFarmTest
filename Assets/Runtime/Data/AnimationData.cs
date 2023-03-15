@@ -20,10 +20,14 @@ namespace AKhvalov.IdleFarm.Runtime.Data
         [SerializeField] 
         private LootDeliverParametersData lootDeliverParametersData;
 
+        [SerializeField] 
+        private UIAnimationParametersData uiAnimationParametersData;
+
         public GrowAnimationParametersData GrowParameters => growParameters;
         public LootPickParametersData LootPickParametersData => lootPickParametersData;
         public LootSpawnParametersData LootSpawnParametersData => lootSpawnParametersData;
         public PlayerAnimationParametersData PlayerAnimationParametersData => playerAnimationParametersData;
         public LootDeliverParametersData LootDeliverParametersData => lootDeliverParametersData;
+        public UIAnimationParametersData UIAnimationParametersData => uiAnimationParametersData;
     }
 }

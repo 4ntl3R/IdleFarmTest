@@ -97,7 +97,7 @@ namespace AKhvalov.IdleFarm.Runtime
         private void ManageInjections()
         {
             playerMovementView.Inject(playerSpeedMultiplier);
-            resourcesView.Inject(lootCapacity);
+            resourcesView.Inject(lootCapacity, animationData.UIAnimationParametersData, animationData.LootDeliverParametersData);
             playerAnimationView.Inject(inputJoystickController, animationData.PlayerAnimationParametersData);
         }
 

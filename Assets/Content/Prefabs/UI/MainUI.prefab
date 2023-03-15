@@ -441,10 +441,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7507658258536605695}
     m_Modifications:
+    - target: {fileID: 2040595058182687417, guid: ecede8f9b96556a48b3ba5770ed2488a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4265135276245579172, guid: ecede8f9b96556a48b3ba5770ed2488a, type: 3}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 3226134725611834349}
+    - target: {fileID: 4886122602917367150, guid: ecede8f9b96556a48b3ba5770ed2488a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5401750899657779278, guid: ecede8f9b96556a48b3ba5770ed2488a, type: 3}
       propertyPath: m_Name
       value: Joystick

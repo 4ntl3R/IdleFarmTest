@@ -23,7 +23,7 @@ namespace AKhvalov.IdleFarm.Runtime.Data
         public float Duration => duration;
         public Ease Ease => ease;
 
-        public float TimeInterval =>
-            basicTimeInterval + Random.Range(-intervalRandomRange, intervalRandomRange);
+        public float TimeInterval => basicTimeInterval + Random.Range(-intervalRandomRange, intervalRandomRange);
+        public float BasicTimeInterval => basicTimeInterval;
     }
 }
