@@ -14,8 +14,12 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         [SerializeField] 
         private RectTransform innerJoystick;
 
-        private RectTransform _outerJoystick;
+        [SerializeField] 
+        private RectTransform joystick;
 
+        private RectTransform _touchZone;
+
+        private Vector2 _touchPosition = Vector2.zero;
         private Vector2 _dragPosition = Vector2.zero;
         private Vector2 _dragNormalized = Vector2.zero;
         
@@ -23,19 +27,23 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         
         void Awake()
         {
-            _outerJoystick = GetComponent<RectTransform>();
+            _touchZone = GetComponent<RectTransform>();
             _maxDragMagnitude = radialConstraint.localPosition.magnitude;
+            joystick.gameObject.SetActive(false);
         }
 
         public void OnPointerDown(PointerEventData eventData)
-        { 
-            OnDrag(eventData);
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle
+                (_touchZone, eventData.position, eventData.pressEventCamera, out _touchPosition);
+            joystick.localPosition = _touchPosition;
+            joystick.gameObject.SetActive(true);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle
-            (_outerJoystick, eventData.position, eventData.pressEventCamera, out _dragPosition);
+                (joystick, eventData.position, eventData.pressEventCamera, out _dragPosition);
 
             _dragNormalized = _dragPosition.normalized;
             
@@ -51,6 +59,7 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         { 
             OnJoystickDrag?.Invoke(Vector2.zero);
             innerJoystick.localPosition = Vector3.zero;
+            joystick.gameObject.SetActive(false);
         }
     }
 }
