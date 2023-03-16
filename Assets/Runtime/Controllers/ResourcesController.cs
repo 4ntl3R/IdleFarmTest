@@ -44,6 +44,7 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
             _model.OnCoinsUpdated += _view.SetCoinValue;
             _model.OnLootUpdated += _view.SetLootValue;
             _model.OnLootCleared += DeliveryHandle;
+            _coinPool.OnObjectDeactivated += _view.AnimateCoinReceiver;
         }
 
         public void UnsubscribeEvents()
@@ -51,7 +52,7 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
             _model.OnCoinsUpdated -= _view.SetCoinValue;
             _model.OnLootUpdated -= _view.SetLootValue;
             _model.OnLootCleared -= DeliveryHandle;
-
+            _coinPool.OnObjectDeactivated -= _view.AnimateCoinReceiver;
         }
 
         private void DeliveryHandle(int lootAmount)

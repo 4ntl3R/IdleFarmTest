@@ -25,5 +25,7 @@ namespace AKhvalov.IdleFarm.Runtime.Data
 
         public float TimeInterval => basicTimeInterval + Random.Range(-intervalRandomRange, intervalRandomRange);
         public float BasicTimeInterval => basicTimeInterval;
+
+        public float MinimalTimeInterval => basicTimeInterval - intervalRandomRange;
     }
 }

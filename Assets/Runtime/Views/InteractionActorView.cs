@@ -1,5 +1,5 @@
 using System;
-using AKhvalov.IdleFarm.Runtime.Data;
+using AKhvalov.IdleFarm.Runtime.Data.Enums;
 using UnityEngine;
 
 namespace AKhvalov.IdleFarm.Runtime.Views

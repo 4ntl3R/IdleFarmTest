@@ -16,6 +16,10 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         [SerializeField] 
         private TextMeshProUGUI _lootText;
 
+        [SerializeField] 
+        private GameObject _coinReceiver;
+
+        private Vector3 _receiverPosition;
         private bool _isTextUpdating = false;
         private Sequence _textUpdateSequence;
         private UIAnimationParametersData _uiData;
@@ -27,6 +31,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
             SetCoinValue(0, 0, 0);
             _uiData = uiData;
             _deliverData = deliverData;
+            _receiverPosition = _coinReceiver.transform.localPosition;
         }
 
         public void SetCoinValue(int startValue, int endValue, int clearedLoot)
@@ -49,9 +54,13 @@ namespace AKhvalov.IdleFarm.Runtime.Views
             _lootText.text = string.Format(LootTextTemplate, currentValue, maxValue);
         }
 
-        public void AnimateCoin()
+        public void AnimateCoinReceiver()
         {
-            
+            var sequence = _coinReceiver.DOReactOnReceive(
+                () => _coinReceiver.transform.localPosition = _receiverPosition, 
+                _uiData, 
+                _deliverData.MinimalTimeInterval);
+            sequence.Play();
         }
     }
 }

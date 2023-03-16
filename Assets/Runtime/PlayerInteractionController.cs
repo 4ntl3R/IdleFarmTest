@@ -1,9 +1,7 @@
-using AKhvalov.IdleFarm.Runtime.Data;
+using AKhvalov.IdleFarm.Runtime.Data.Enums;
 using AKhvalov.IdleFarm.Runtime.Extensions;
 using AKhvalov.IdleFarm.Runtime.Models;
 using AKhvalov.IdleFarm.Runtime.Views;
-using DG.Tweening;
-using UnityEngine;
 
 namespace AKhvalov.IdleFarm.Runtime.Controllers
 {

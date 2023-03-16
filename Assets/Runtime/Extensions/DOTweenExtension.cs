@@ -106,6 +106,19 @@ namespace AKhvalov.IdleFarm.Runtime.Extensions
             return result;
         }
 
+        public static Sequence DOReactOnReceive(this GameObject target, Action onCompleteCallback, 
+            UIAnimationParametersData data, float duration)
+        {
+            var jumpVector = target.transform.localPosition + Vector3.up;
+            Sequence result = DOTween.Sequence();
+            result
+                .Append(target.transform.DOLocalJump(jumpVector, data.CounterJumpPower, DefaultJumpsAmount, duration))
+                .SetEase(data.ReceiverEase)
+                .OnComplete(onCompleteCallback.Invoke)
+                .Pause();
+            return result;
+        }
+
         public static Sequence DOUpdateCounter(this TextMeshProUGUI textMeshPro, Action onCompeteCallback,
             TextChangeParametersData textData, UIAnimationParametersData data)
         {

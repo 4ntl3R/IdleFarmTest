@@ -52,4 +52,6 @@ MonoBehaviour:
     basicTimeInterval: 0.1
     intervalRandomRange: 0.05
   uiAnimationParametersData:
+    counterJumpPower: 5
+    receiverEase: 2
     textEase: 11

@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _coinText: {fileID: 4409339953637777233}
   _lootText: {fileID: 5768842940222770113}
+  _coinReceiver: {fileID: 1838196443683325785}
 --- !u!1 &4619776231162429767
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +842,11 @@ RectTransform:
 --- !u!224 &5334753959039975511 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4374315020423384120, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
+  m_PrefabInstance: {fileID: 8555830093796215919}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1838196443683325785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8016125649652779830, guid: 0558fa631db42cd4294d52c782a5dd13, type: 3}
   m_PrefabInstance: {fileID: 8555830093796215919}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4409339953637777233 stripped

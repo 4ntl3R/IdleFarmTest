@@ -1,4 +1,4 @@
-using AKhvalov.IdleFarm.Runtime.Data;
+using AKhvalov.IdleFarm.Runtime.Data.Enums;
 
 namespace AKhvalov.IdleFarm.Runtime.Extensions
 {

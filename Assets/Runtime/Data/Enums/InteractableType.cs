@@ -1,6 +1,6 @@
 using System;
 
-namespace AKhvalov.IdleFarm.Runtime.Data
+namespace AKhvalov.IdleFarm.Runtime.Data.Enums
 {
     [Serializable]
     [Flags]
