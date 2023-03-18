@@ -15,6 +15,9 @@ namespace AKhvalov.IdleFarm.Runtime
 
         [SerializeField] 
         private LevelPreferencesData levelData;
+
+        [SerializeField] 
+        private LevelPrefabData prefabData;
         
         [SerializeField] 
         private PlayerMovementView playerMovementView;
@@ -22,17 +25,8 @@ namespace AKhvalov.IdleFarm.Runtime
         [SerializeField] 
         private InputJoystickController inputJoystickController;
 
-        [SerializeField] 
-        private GameObject coinPrefab;
-
         [SerializeField]
         private GameObject coinTarget;
-
-        [SerializeField] 
-        private GameObject lootPrefab;
-
-        [SerializeField] 
-        private GameObject lootDeliveryPrefab;
 
         [SerializeField] 
         private GameObject deliveryTarget;
@@ -77,9 +71,9 @@ namespace AKhvalov.IdleFarm.Runtime
         
         private void CreateClasses()
         {
-            _lootPool = new GameObjectPool(lootPrefab);
-            _lootDeliveryPool = new GameObjectPool(lootDeliveryPrefab);
-            _coinPool = new GameObjectPool(coinPrefab);
+            _lootPool = new GameObjectPool(prefabData.LootPrefab);
+            _lootDeliveryPool = new GameObjectPool(prefabData.LootDeliveryPrefab);
+            _coinPool = new GameObjectPool(prefabData.CoinPrefab);
             
             _resourcesModel = new ResourcesModel(levelData.LootCapacity, levelData.LootCost);
             

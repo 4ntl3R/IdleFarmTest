@@ -1183,6 +1183,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5499570205099052353, guid: ee29169897d2e4448b4e498545d01f5e, type: 3}
     - target: {fileID: 6324282449871403000, guid: 388727b87f8c44c4490be4374a7889e9, type: 3}
+      propertyPath: prefabData
+      value: 
+      objectReference: {fileID: 11400000, guid: b1177ff800e0b6a438797795be30ae4c, type: 2}
+    - target: {fileID: 6324282449871403000, guid: 388727b87f8c44c4490be4374a7889e9, type: 3}
       propertyPath: gatherHitBox
       value: 
       objectReference: {fileID: 1058295573}
