@@ -11,6 +11,12 @@ namespace AKhvalov.IdleFarm.Runtime
     public class DependencyManager : MonoBehaviour
     {
         [SerializeField] 
+        private AnimationData animationData;
+
+        [SerializeField] 
+        private LevelPreferencesData levelData;
+        
+        [SerializeField] 
         private PlayerMovementView playerMovementView;
 
         [SerializeField] 
@@ -32,25 +38,7 @@ namespace AKhvalov.IdleFarm.Runtime
         private GameObject deliveryTarget;
 
         [SerializeField] 
-        private float playerSpeedMultiplier = 10f;
-
-        [SerializeField] 
-        private int gatherableCapacity = 1;
-
-        [SerializeField] 
-        private int lootCapacity = 40;
-
-        [SerializeField] 
-        private int lootCost = 1;
-
-        [SerializeField] 
-        private float hitBoxDuration = 0.1f;
-
-        [SerializeField] 
         private List<InteractionReactorView> gatherables;
-
-        [SerializeField] 
-        private AnimationData animationData;
 
         [SerializeField] 
         private ResourcesView resourcesView;
@@ -93,19 +81,22 @@ namespace AKhvalov.IdleFarm.Runtime
             _lootDeliveryPool = new GameObjectPool(lootDeliveryPrefab);
             _coinPool = new GameObjectPool(coinPrefab);
             
-            _resourcesModel = new ResourcesModel(lootCapacity, lootCost);
+            _resourcesModel = new ResourcesModel(levelData.LootCapacity, levelData.LootCost);
             
-            _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData);
+            _gatherableController = new GatherableController(_lootPool, gatherables, levelData.GatherableCapacity, 
+                animationData);
             _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
             _resourcesController = new ResourcesController(resourcesView, _resourcesModel, _lootDeliveryPool, 
                 interactionActorView, deliveryTarget, animationData.LootDeliverParametersData, coinTarget, _coinPool);
-            _playerInteractionController = new PlayerInteractionController(interactionActorView, gatherHitBox, _resourcesModel, playerAnimationView, hitBoxDuration);
+            _playerInteractionController = new PlayerInteractionController(interactionActorView, gatherHitBox, 
+                _resourcesModel, playerAnimationView, levelData.HitBoxDuration);
         }
 
         private void ManageInjections()
         {
-            playerMovementView.Inject(playerSpeedMultiplier);
-            resourcesView.Inject(lootCapacity, animationData.UIAnimationParametersData, animationData.LootDeliverParametersData);
+            playerMovementView.Inject(levelData.PlayerSpeedMultiplier);
+            resourcesView.Inject(levelData.LootCapacity, animationData.UIAnimationParametersData, 
+                animationData.LootDeliverParametersData);
             playerAnimationView.Inject(inputJoystickController, animationData.PlayerAnimationParametersData);
         }
 
