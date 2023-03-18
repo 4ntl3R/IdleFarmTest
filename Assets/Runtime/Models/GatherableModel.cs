@@ -21,12 +21,13 @@ namespace AKhvalov.IdleFarm.Runtime.Models
             if (--_currentCapacity <= 0)
             {
                 OnEmpty?.Invoke(this);
+                Recharge();
                 return;
             }
             OnContaining?.Invoke(this);
         }
 
-        public void Recharge()
+        private void Recharge()
         {
             _currentCapacity = _maxCapacity;
         }

@@ -95,7 +95,7 @@ namespace AKhvalov.IdleFarm.Runtime
             
             _resourcesModel = new ResourcesModel(lootCapacity, lootCost);
             
-            _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData.GrowParameters);
+            _gatherableController = new GatherableController(_lootPool, gatherables, gatherableCapacity, animationData);
             _playerMovementController = new PlayerMovementController(inputJoystickController, playerMovementView);
             _resourcesController = new ResourcesController(resourcesView, _resourcesModel, _lootDeliveryPool, 
                 interactionActorView, deliveryTarget, animationData.LootDeliverParametersData, coinTarget, _coinPool);

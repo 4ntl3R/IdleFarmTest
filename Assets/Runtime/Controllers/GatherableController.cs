@@ -14,13 +14,14 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         private readonly Dictionary<InteractionReactorView, GatherableModel> _viewModelDictionary;
         private readonly Dictionary<GatherableModel, InteractionReactorView> _modelViewDictionary;
         private GrowAnimationParametersData _animationParameters;
-
+        private float _gatheringDuration;
 
         public GatherableController(GameObjectPool lootPool, List<InteractionReactorView> gatherables, 
-            int gatherableCapacity, GrowAnimationParametersData animationParameters)
+            int gatherableCapacity, AnimationData animationData)
         {
             _lootPool = lootPool;
-            _animationParameters = animationParameters;
+            _animationParameters = animationData.GrowParameters;
+            _gatheringDuration = animationData.PlayerAnimationParametersData.GatheringDuration;
             
             _viewModelDictionary = new Dictionary<InteractionReactorView, GatherableModel>();
             _modelViewDictionary = new Dictionary<GatherableModel, InteractionReactorView>();
@@ -41,14 +42,18 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
                 viewModelPair.Key.OnInteractionEnd -= Gather;
                 viewModelPair.Value.OnEmpty -= ResetGatherable;
                 viewModelPair.Value.OnContaining -= ActivateGatherable;
+                viewModelPair.Value.OnEmpty -= ResetVisualizations; 
+                viewModelPair.Value.OnContaining -= SwitchVisualizations;
             }
         }
 
         private void Subscribe(GatherableModel model, InteractionReactorView view)
         {
             view.OnInteractionEnd += Gather;
-            model.OnEmpty += ResetGatherable; 
-            model.OnContaining += ActivateGatherable;
+            model.OnEmpty += ResetGatherable;
+            model.OnEmpty += ResetVisualizations; 
+            model.OnContaining += DelayedActivateGatherable;
+            model.OnContaining += SwitchVisualizations;
         }
 
         private void Gather(InteractionActorView actor, InteractionReactorView reactorView)
@@ -72,6 +77,20 @@ namespace AKhvalov.IdleFarm.Runtime.Controllers
         {
             _modelViewDictionary[sender].Activate();
         }
+
+        private void DelayedActivateGatherable(GatherableModel sender)
+        {
+            DOTweenExtension.SequenceDelay(_gatheringDuration, (() => ActivateGatherable(sender)));
+        }
+
+        private void SwitchVisualizations(GatherableModel sender)
+        {
+            _modelViewDictionary[sender].GetComponent<VisualizationSwitchView>().SwitchVisualization();
+        }
         
+        private void ResetVisualizations(GatherableModel sender)
+        {
+            _modelViewDictionary[sender].GetComponent<VisualizationSwitchView>().ResetVisualization();
+        }
     }
 }

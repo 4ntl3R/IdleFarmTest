@@ -1203,6 +1203,10 @@ PrefabInstance:
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6324282449871403000, guid: 388727b87f8c44c4490be4374a7889e9, type: 3}
+      propertyPath: gatherableCapacity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324282449871403000, guid: 388727b87f8c44c4490be4374a7889e9, type: 3}
       propertyPath: lootDeliveryPrefab
       value: 
       objectReference: {fileID: 1997571450541503873, guid: ce32387d96b27eb429888a508286c37d, type: 3}

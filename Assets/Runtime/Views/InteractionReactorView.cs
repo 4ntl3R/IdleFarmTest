@@ -23,7 +23,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         [SerializeField] 
         private InteractableType interactableType;
 
-        [SerializeField] 
+        [SerializeField]
         private Renderer visualisation;
 
         private Collider _collider;
