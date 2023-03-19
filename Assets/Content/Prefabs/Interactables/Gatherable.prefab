@@ -273,6 +273,10 @@ PrefabInstance:
       propertyPath: interactableType
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8194525097630001250, guid: 92ac79cd05438b840b73cf5dcdb93ba2, type: 3}
+      propertyPath: interactionCollider
+      value: 
+      objectReference: {fileID: 1777705677054125332}
     - target: {fileID: 8194525097630001251, guid: 92ac79cd05438b840b73cf5dcdb93ba2, type: 3}
       propertyPath: m_Size.y
       value: 1
@@ -295,6 +299,11 @@ GameObject:
 --- !u!4 &1777705677054125335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8194525097630001248, guid: 92ac79cd05438b840b73cf5dcdb93ba2, type: 3}
+  m_PrefabInstance: {fileID: 7571501836138696055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1777705677054125332 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8194525097630001251, guid: 92ac79cd05438b840b73cf5dcdb93ba2, type: 3}
   m_PrefabInstance: {fileID: 7571501836138696055}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &8811576458382773001

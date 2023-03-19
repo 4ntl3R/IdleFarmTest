@@ -25,8 +25,9 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         [SerializeField]
         private Renderer visualisation;
-
-        private Collider _collider;
+        
+        [SerializeField]
+        private Collider interactionCollider;
 
         public InteractableType InteractableType => interactableType;
         
@@ -34,11 +35,11 @@ namespace AKhvalov.IdleFarm.Runtime.Views
 
         private void Awake()
         {
-            _collider = GetComponent<Collider>();
+            interactionCollider = interactionCollider == null ? GetComponent<Collider>() : interactionCollider;
             
             #if UNITY_EDITOR
             
-                Assert.IsTrue(_collider.isTrigger, string.Format(ColliderAssertionString, gameObject.name));
+                Assert.IsTrue(interactionCollider.isTrigger, string.Format(ColliderAssertionString, gameObject.name));
             
             #endif
         }
@@ -47,7 +48,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         {
             if (isToggleable & toggleType == ToggleType.OnInteractionStart)
             {
-                _collider.enabled = false;
+                interactionCollider.enabled = false;
             }
             OnInteraction?.Invoke(actorView, this);
         }
@@ -56,7 +57,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         {
             if (isToggleable)
             {
-                _collider.enabled = true;
+                interactionCollider.enabled = true;
             }
         }
 
@@ -64,7 +65,7 @@ namespace AKhvalov.IdleFarm.Runtime.Views
         {
             if (isToggleable & toggleType == ToggleType.OnInteractionEnd)
             {
-                _collider.enabled = false;
+                interactionCollider.enabled = false;
             }
             OnInteractionEnd?.Invoke(actorView, this);
         }

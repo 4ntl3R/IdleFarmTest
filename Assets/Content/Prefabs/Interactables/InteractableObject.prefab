@@ -57,4 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93e1bb0b4c7dda489e6a49003f2826e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isToggleable: 1
+  toggleType: 0
   interactableType: 0
+  visualisation: {fileID: 0}
+  interactionCollider: {fileID: 0}
