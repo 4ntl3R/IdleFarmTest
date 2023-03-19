@@ -15,5 +15,5 @@ MonoBehaviour:
   playerSpeedMultiplier: 5
   gatherableCapacity: 2
   lootCapacity: 40
-  lootCost: 1
+  lootCost: 15
   hitBoxDuration: 0.1
