@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultAnimationData
   m_EditorClassIdentifier: 
   growParameters:
-    targetScale: {x: 1, y: 2, z: 1}
+    targetScale: {x: 1, y: 1, z: 1}
     targetColor: {r: 1, g: 1, b: 0, a: 1}
     startColor: {r: 0, g: 1, b: 0.2509804, a: 1}
     fullDuration: 10

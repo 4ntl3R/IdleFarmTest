@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e4af6b09c80c54b82de7445649459c, type: 3}
   m_Name: DefaultLevelData
   m_EditorClassIdentifier: 
-  playerSpeedMultiplier: 10
-  gatherableCapacity: 1
+  playerSpeedMultiplier: 5
+  gatherableCapacity: 2
   lootCapacity: 40
   lootCost: 1
   hitBoxDuration: 0.1
