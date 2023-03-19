@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7147564774719784015
 Transform:
@@ -46,7 +46,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4725794554232912386
 Transform:
@@ -118,6 +118,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GardenBed
       objectReference: {fileID: 0}
+    - target: {fileID: 1373529512051811069, guid: 4394492a5870a38429b7e45be262acb9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734222661377766236, guid: 4394492a5870a38429b7e45be262acb9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4394492a5870a38429b7e45be262acb9, type: 3}
 --- !u!4 &1844453256334179147 stripped
@@ -179,6 +187,14 @@ PrefabInstance:
     - target: {fileID: 1373529512051811069, guid: 4394492a5870a38429b7e45be262acb9, type: 3}
       propertyPath: m_Name
       value: GardenBed (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1373529512051811069, guid: 4394492a5870a38429b7e45be262acb9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734222661377766236, guid: 4394492a5870a38429b7e45be262acb9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4394492a5870a38429b7e45be262acb9, type: 3}

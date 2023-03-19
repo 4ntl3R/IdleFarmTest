@@ -695,7 +695,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &570425092
 Transform:
@@ -1018,7 +1018,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1181616168
 MonoBehaviour:
@@ -1083,7 +1083,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1281747811
 MonoBehaviour:
@@ -1951,6 +1951,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 5591195082148943793, guid: 666ad1c55006b4a4fa1f94cde9c7c5f9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 5591195082148943805, guid: 666ad1c55006b4a4fa1f94cde9c7c5f9, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2239,6 +2243,10 @@ PrefabInstance:
     - target: {fileID: 6324282449871403001, guid: 388727b87f8c44c4490be4374a7889e9, type: 3}
       propertyPath: m_Name
       value: LifetimeScope
+      objectReference: {fileID: 0}
+    - target: {fileID: 6324282449871403001, guid: 388727b87f8c44c4490be4374a7889e9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 6324282449871403003, guid: 388727b87f8c44c4490be4374a7889e9, type: 3}
       propertyPath: m_RootOrder

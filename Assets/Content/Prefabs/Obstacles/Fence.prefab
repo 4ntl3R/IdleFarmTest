@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1778507125169352233
 Transform:
@@ -45,7 +45,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6149679793228349221
 Transform:
@@ -124,6 +124,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2b883b842a6f49a40b33e5e028add09f, type: 3}
       propertyPath: m_Name
       value: Fense_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2b883b842a6f49a40b33e5e028add09f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b883b842a6f49a40b33e5e028add09f, type: 3}

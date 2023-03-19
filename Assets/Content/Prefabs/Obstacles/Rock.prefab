@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7413083331118021376
 Transform:
@@ -46,7 +46,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4168826446289715367
 Transform:
@@ -130,6 +130,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d2d8da9d10e14a24f875de19535f1758, type: 3}
       propertyPath: m_Name
       value: RockWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d2d8da9d10e14a24f875de19535f1758, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2d8da9d10e14a24f875de19535f1758, type: 3}
